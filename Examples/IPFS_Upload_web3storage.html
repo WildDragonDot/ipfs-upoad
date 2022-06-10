@@ -1,0 +1,17 @@
+<script type="module">
+  import { Web3Storage } from 'https://aloycwl.github.io/js/cdn/web3storage.min.js';
+  var token =
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDQ4N0MyOEM5QkI0ODk3NzIyNDVFYkVEMjg1ZWFGMDJkYTVhNkFhYTciLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2NTA1MTA3NTg1OTksIm5hbWUiOiJ0ZXN0In0.ep9biweaboiJ5p2_w-1mV4DSvzmXosM0wPY9kfS0NCA',
+    client = new Web3Storage({ token }),
+    files = [
+      new File(
+        [
+          new Blob([JSON.stringify({ something: 'web3storage' })], {
+            type: 'application/json',
+          }),
+        ],
+        '0'
+      ),
+    ];
+  document.write(`https://ipfs.io/ipfs/${await client.put(files)}/0`);
+</script>

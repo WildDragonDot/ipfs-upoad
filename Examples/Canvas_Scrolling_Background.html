@@ -1,0 +1,33 @@
+<canvas id="scrcan" width="600" height="266"></canvas>
+
+<script>
+  si = new Image();
+  si.crossOrigin = 'anonymous';
+  si.src =
+    'https://ipfs.io/ipfs/bafybeih6gwh4juwjkapezp5qqby7n6rcihazna4kj3owxpxlw3r2v66q5m/vl.png';
+
+  si.onload = function () {
+    can = document.getElementById('scrcan');
+    cw = can.width;
+    x = 0;
+    imgW = si.width;
+    imgH = si.height;
+    ctx = can.getContext('2d');
+    draw();
+  };
+
+  function draw() {
+    timer = null;
+    if (imgW <= cw) {
+      if (x > cw) x -= imgW;
+      if (x > 0) ctx.drawImage(si, -imgW + x, 0, imgW, imgH);
+      if (x - imgW > 0) ctx.drawImage(si, -imgW * 2 + x, 0, imgW, imgH);
+    } else {
+      if (x > cw) x = cw - imgW;
+      if (x > cw - imgW) ctx.drawImage(si, x - imgW + 1, 0, imgW, imgH);
+    }
+    ctx.drawImage(si, x, 0, imgW, imgH);
+    x += 0.02;
+    timer = setInterval(draw, 1);
+  }
+</script>
